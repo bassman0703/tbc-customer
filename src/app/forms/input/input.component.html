@@ -1,0 +1,73 @@
+<nz-form-item>
+
+  <nz-form-label class="label" [nzSpan]="24" *ngIf="label"
+                 [nzRequired]="required"
+                 [nzFor]="inputId">{{ label}}</nz-form-label>
+  <nz-form-control
+    [nzSpan]="24"
+    [nzErrorTip]="emailErrorTpl"
+    [nzValidateStatus]="(ngControl?.control?.dirty || ngControl?.control?.touched) && ngControl?.control?.invalid? 'error' : ''"
+  >
+    <nz-input-group [nzPrefix]="prefix" [nzPrefixIcon]="prefixIcon" [nzSuffix]="suffix" [nzSuffixIcon]="suffixIcon"
+                    [nzSize]="size" class="round-border-edge">
+      <ng-container *ngIf="mask; else noMask">
+        <input
+          nz-input
+          [nzSize]="size"
+          [id]="inputId"
+          [type]="type"
+          [disabled]="disabled"
+          [placeholder]="placeholder"
+          [ngModel]="value"
+          (ngModelChange)="updateAndNotify($event)"
+          (blur)="blur()"
+          [autofocus]="autoFocus"
+          [step]="0.01"
+          [min]="0"
+        />
+      </ng-container>
+      <ng-template #noMask>
+        <input
+          nz-input
+          [nzSize]="size"
+          [id]="inputId"
+          [type]="type === 'float' ? 'number' : type"
+          [disabled]="disabled"
+          [readonly]="readonly"
+          [placeholder]="placeholder"
+          [ngModel]="value"
+          (ngModelChange)="updateAndNotify($event)"
+          (blur)="blur()"
+          [step]="type === 'float' ? 0.01 : 1"
+          [min]="0"
+          [max]="max"
+        />
+      </ng-template>
+    </nz-input-group>
+    <ng-template #emailErrorTpl let-control>
+      <div class="error-message">
+        <ng-container *ngIf="errorMessage; else noCustomMessage">
+          {{errorMessage}}
+        </ng-container>
+        <ng-template #noCustomMessage>
+          <ng-container *ngIf="ngControl.hasError('email')">
+            არასწორი ელ.ფოსტის ფორმატი
+          </ng-container>
+          <ng-container *ngIf="ngControl.hasError('required')">
+            მითითება სავალდებულოა
+          </ng-container>
+          <ng-container *ngIf="ngControl.hasError('minlength')">
+            მიუთითეთ მინიმუმ 11 სიმბოლო
+          </ng-container>
+          <ng-container *ngIf="ngControl.hasError('maxlength')">
+            მიუთითეთ მაქსიმუმ 11 სიმბოლო
+          </ng-container>
+          <ng-container *ngIf="ngControl.hasError('min')">
+            გთხოვთ მიუთითოთ 0 ზე მეტი
+          </ng-container>
+        </ng-template>
+
+      </div>
+    </ng-template>
+  </nz-form-control>
+</nz-form-item>

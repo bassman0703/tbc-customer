@@ -1,0 +1,73 @@
+<nz-form-item>
+  <nz-form-label
+    [nzSpan]="24"
+    *ngIf="label"
+    [nzRequired]="required"
+    [nzFor]="inputId"
+    [nzTooltipTitle]="nzTooltipTitle"
+  >{{ label }}
+  </nz-form-label
+  >
+  <nz-form-control
+    [nzSpan]="24"
+    [nzErrorTip]="errorTpl"
+    [nzValidateStatus]="
+      (ngControl?.dirty || ngControl?.touched) && ngControl?.invalid
+        ? 'error'
+        : ''
+    "
+  >
+    <ng-template #clearIconTmpl
+    ><i
+      nz-icon
+      nzType="close-circle"
+      nzTheme="fill"
+      (click)="clear($event)"
+    ></i
+    ></ng-template>
+    <nz-select
+      nzShowSearch
+      [nzAllowClear]="nzAllowClear"
+      [nzClearIcon]="clearIconTmpl"
+      [nzMode]="mode"
+      [nzMaxTagCount]="maxTagCount"
+      [nzPlaceHolder]="placeholder"
+      [id]="inputId"
+      [disabled]="disabled || readonly"
+      [ngModel]="value"
+      (ngModelChange)="onChange($event)"
+      (blur)="blur()"
+      [nzServerSearch]="nzServerSearch"
+      (nzOpenChange)="openChange($event)"
+    >
+      <ng-container *ngIf="withTooltip; else withoutTooltip">
+        <nz-option
+          *ngFor="let item of data"
+          nzCustomContent
+          [nzLabel]="toDisplay(item)"
+          [nzValue]="toValue(item)"
+          [nzDisabled]="isDisabled(item)"
+        >
+          <i nz-icon [nzType]="item.icon" class="icon"></i>
+          <span>
+            {{ toDisplay(item) }}
+          </span>
+
+        </nz-option>
+      </ng-container>
+      <ng-template #withoutTooltip>
+        <nz-option
+          *ngFor="let item of data"
+          [nzLabel]="toDisplay(item)"
+          [nzValue]="toValue(item)"
+          [nzDisabled]="isDisabled(item)"
+        ></nz-option>
+      </ng-template>
+    </nz-select>
+    <ng-template #errorTpl let-control>
+      <ng-container *ngIf="ngControl.hasError('required')">
+        მითითება სავალდებულოა
+      </ng-container>
+    </ng-template>
+  </nz-form-control>
+</nz-form-item>

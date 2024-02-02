@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  width: auto;
+  min-width: 200px;
+  border-radius: 8px;
+
+  nz-form-label {
+    margin-bottom: 6px;
+  }
+}
+
+.error-message {
+  margin-bottom: 0;
+}
+
+nz-select {
+  width: auto;
+  border-radius: 8px;
+}
+
+.icon {
+  font-size: 18px;
+  margin-right: 8px
+}
+  ::ng-deep .ant-select-selection-item-remove svg {
+    fill: none;
+  }

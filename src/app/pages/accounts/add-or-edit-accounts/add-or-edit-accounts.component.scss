@@ -1,0 +1,22 @@
+.with-icon{
+  display: flex;
+  align-items: center;
+}
+.footer {
+  display: flex;
+  justify-content: end;
+}
+.icon{
+  cursor: pointer;
+  margin-top:16px;
+  margin-left:24px;
+  ::ng-deep{
+    svg{
+      font-size: 20px;
+      fill: none;
+      path{
+        stroke:#292D32;
+      }
+    }
+  }
+}

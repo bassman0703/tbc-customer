@@ -1,0 +1,21 @@
+<form #uploadForm class="file-upload">
+    <input #fileInput type="file" name="fileUpload" (change)="onFileSelected($event)" accept="image/*">
+
+    <div class="drag-area"
+        (click)="fileInput.click()" 
+        [class.hovered]="hovered" 
+        fileDrop
+        (filesDropped)="fileDrop($event, uploadForm)" 
+        (filesHovered)="onHover($event)"
+    >
+        <span nz-icon nzType="cloud-upload" nzTheme="outline"></span>
+        <div class="upload-text">
+            დააჭირე აქ ან ჩააგდე ფაილი ასატვირთად
+        </div>
+    </div>
+
+    <div class="display" *ngIf="displayFile">
+        <img [src]="displayFile | htmlSanitizer" alt="IMG">
+        <span (click)="deleteFile(fileInput)" nz-icon nzType="delete" nzTheme="outline"></span>
+    </div>
+</form>

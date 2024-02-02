@@ -1,0 +1,18 @@
+.label {
+  color: var(--text-color);
+}
+
+.ant-input-affix-wrapper {
+  color: var(--text-color);
+}
+
+.ant-input {
+  color: var(--text-color);
+}
+.round-border-edge{
+  &.ant-input-group {
+    >.ant-input{
+      border-radius: 7px;
+    }
+  }
+}
